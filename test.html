@@ -5,6 +5,37 @@
 <title>Insert title here</title>
 </head>
 <body>
+<?php 
+if (!function_exists('apache_request_headers')) { 
+        function apache_request_headers() { 
+            foreach($_SERVER as $key=>$value) { 
+                if (substr($key,0,5)=="HTTP_") { 
+                    $key=str_replace(" ","-",ucwords(strtolower(str_replace("_"," ",substr($key,5))))); 
+                    $out[$key]=$value; 
+                }else{ 
+                    $out[$key]=$value; 
+        } 
+            } 
+            return $out; 
+        } 
+} 
+?>
+
+<? 
+echo "HTTP_REFERER: ", $_SERVER['HTTP_REFERER'], "<br/>" ;
+echo "HTTP_USER_AGENT: ", $_SERVER['HTTP_USER_AGENT'], "<br/>" ;
+echo "HTTP_CONNECTION: ", $_SERVER['HTTP_CONNECTION'], "<br/>" ;
+echo "REMOTE_ADDR: ", $_SERVER['REMOTE_ADDR'], "<br/>" ;
+echo "HTTP_DNT: ", $_SERVER['HTTP_DNT'], "<br/>" ;
+echo "HTTP_HOST: ", $_SERVER['HTTP_HOST'], "<br/>" ;
+echo "HTTP_CACHE_CONTROL: ", $_SERVER['HTTP_CACHE_CONTROL'], "<br/>" ;
+echo "REQUEST_URI: ", $_SERVER['REQUEST_URI'], "<br/>" ;
+echo "HTTP_ACCEPT: ", $_SERVER['HTTP_ACCEPT'], "<br/>" ;
+echo "HTTP_X_FORWARDED_FOR: ", $_SERVER['HTTP_X_FORWARDED_FOR'], "<br/>" ;
+echo "HTTP_ACCEPT_LANGUAGE: ", $_SERVER['HTTP_ACCEPT_LANGUAGE'], "<br/>" ;
+echo "HTTP_ACCEPT_ENCODING: ", $_SERVER['HTTP_ACCEPT_ENCODING'], "<br/>" ;
+
+?>
 
 </body>
 </html>
