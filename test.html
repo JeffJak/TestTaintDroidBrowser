@@ -22,6 +22,7 @@ if (!function_exists('apache_request_headers')) {
 ?>
 
 <? 
+
 echo "HTTP_REFERER: ", $_SERVER['HTTP_REFERER'], "<br/>" ;
 echo "HTTP_USER_AGENT: ", $_SERVER['HTTP_USER_AGENT'], "<br/>" ;
 echo "HTTP_CONNECTION: ", $_SERVER['HTTP_CONNECTION'], "<br/>" ;
@@ -34,8 +35,38 @@ echo "HTTP_ACCEPT: ", $_SERVER['HTTP_ACCEPT'], "<br/>" ;
 echo "HTTP_X_FORWARDED_FOR: ", $_SERVER['HTTP_X_FORWARDED_FOR'], "<br/>" ;
 echo "HTTP_ACCEPT_LANGUAGE: ", $_SERVER['HTTP_ACCEPT_LANGUAGE'], "<br/>" ;
 echo "HTTP_ACCEPT_ENCODING: ", $_SERVER['HTTP_ACCEPT_ENCODING'], "<br/>" ;
+echo "HTTP_X-FORWARDED-HOST: ", $_SERVER['HTTP_X-FORWARDED-HOST'], "<br/>" ;
+echo "HTTP_X-FORWARDED-SERVER: ", $_SERVER['HTTP_X-FORWARDED-SERVER'], "<br/>" ;
+echo "HTTP_X-WAP-PROFILE: ", $_SERVER['HTTP_X-WAP-PROFILE'], "<br/>" ;
+echo "HTTP_X-APN-ID: ", $_SERVER['HTTP_X-APN-ID'], "<br/>" ;
+echo "HTTP_X-IMSI: ", $_SERVER['HTTP_X-IMSI'], "<br/>" ;
+echo "HTTP_X-MSISDN: ", $_SERVER['HTTP_X-MSISDN'], "<br/>" ;
+echo "HTTP_X-WSB-IDENTITY: ", $_SERVER['HTTP_X-WSB-IDENTITY'], "<br/>" ;
+echo "HTTP_X-UP-CALLING-LINE-ID: ", $_SERVER['HTTP_UP-CALLING-LINE-ID'], "<br/>" ;
 
 ?>
+
+<p id="demo">Click the button to get your coordinates:</p>
+
+<button onclick="getLocation()">Try It</button>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML="Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;	
+}
+</script>
+
 
 </body>
 </html>
